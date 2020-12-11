@@ -11,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Información referente al producto")
 @Entity
 @Table(name = "producto")
 public class Producto {
@@ -23,25 +27,29 @@ public class Producto {
 	@JoinColumn(name = "id_proveedor", nullable = false, foreignKey  = @ForeignKey(name = "FK_producto_proveedor"))
 	private Proveedores proveedores;
 	
+	@ApiModelProperty(notes = "Codigo del producto debe tener minimo 3 caracteres")
 	@Size(min = 3, message = "Codigo del producto debe tener minimo 3 caracteres")
 	@Column(name = "codigo_producto", nullable = false, length = 4)
 	private String codigoProducto;
 	
+	@ApiModelProperty(notes = "Nombre del producto debe tener minimo 3 caracteres")
 	@Size(min = 3, message = "Nombre del producto debe tener minimo 3 caracteres")
 	@Column(name = "nombre_producto", nullable = false, length = 15)
 	private String nombreProducto;
 	
+	@ApiModelProperty(notes = "Marca del producto debe tener minimo 3 caracteres")
 	@Size(min = 3, message = "Marca del producto debe tener minimo 3 caracteres")
 	@Column(name = "marca", nullable = false, length = 15)
 	private String marca;
 	
-	@Size(min = 3, message = "Descripción debe tener minimo 5 caracteres")
+	@ApiModelProperty(notes = "Descripción debe tener minimo 5 caracteres")
+	@Size(min = 5, message = "Descripción debe tener minimo 5 caracteres")
 	@Column(name = "descripcion", nullable = false, length = 70)
 	private String descripcion;
 	
 	@Column(name = "precio_unidad", nullable = false)
 	private double precioUnidad;
-
+	
 	@Column(name = "foto_url", nullable = true)
 	private String fotoUrl;
 	

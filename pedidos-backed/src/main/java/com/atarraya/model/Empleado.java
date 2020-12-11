@@ -7,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "Información referente al empleado") 
 @Entity
 @Table (name ="empleado")
 public class Empleado {
@@ -17,14 +20,18 @@ public class Empleado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEmpleado;
 	
+	@ApiModelProperty(notes = "Nombres debe tener minimo 3 caracteres")
 	@Column(name = "nombres", nullable = false)
 	private String nombres;
 	
+	@ApiModelProperty(notes = "Apellidos debe tener minimo 3 caracteres")
 	@Column(name = "apellidos", nullable = false)
 	private String apellidos;
 
+	@ApiModelProperty(notes = "cargo debe tener minimo 3 caracteres")
 	@Column(name = "cargo", nullable = false)
 	private String cargo;
+	
 	
 	@Column(name = "foto_url", nullable = true)
 	private String fotoUrl;

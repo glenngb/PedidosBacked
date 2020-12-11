@@ -26,8 +26,8 @@ public class ComprasBackedApplicationTests {
 	public void crearUsuario() {
 		Usuario us = new Usuario();
 		us.setIdUsuario(1);
-		us.setUsername("glenn.garciab@gmail.com");
-		us.setPassword(bcrypt.encode("1234"));
+		us.setUsername("glenn@gmail.com");
+		us.setPassword(bcrypt.encode("123"));
 		us.setEnabled(true);
 		
 		Usuario retorno = repo.save(us);

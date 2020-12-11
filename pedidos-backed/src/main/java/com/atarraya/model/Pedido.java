@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Información referente al pedido")
 @Entity
 @Table (name ="pedido")
 public class Pedido {
@@ -24,26 +28,24 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPedido;
 	
-	//Se indica que la relacion es de muchos a 1
 		@ManyToOne  
-		 //Se agrega nueva columna para la foreignKey
 		@JoinColumn(name = "id_empleado", nullable = false, foreignKey  = @ForeignKey(name = "FK_pedido_empleado"))
 		private Empleado empleado;
 	
+	@ApiModelProperty(notes = "Se refiere al número de pedido el cual es consecutivo")
 	@Column(name = "numero", nullable = false,length = 11)
 	private int numero;
 	
 	private LocalDateTime fecha;
 	
+	@ApiModelProperty(notes = "Precio total delpedido")
 	@Column(name = "total_pedido", nullable = false)
 	private double totalPedido;
 	
+	@ApiModelProperty(notes = "Observacion debe tener minimo 3 caracteres")
 	@Size(min = 3, message = "Observacion debe tener minimo 3 caracteres")
 	@Column(name = "observacion", nullable = false, length = 170)
 	private String observacion;
-	
-	/*Relación tabla consulta con tabla DetalleConsulta, de uno a muchos, se debe manejar bidirecional, 
-	cuando se elimina una consulta se debe eliminar su detalle*/
 	
 	@OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL}, orphanRemoval = true) //orphanRemoval para que no quede ningun espacio werfano en bd
 	private List<DetallePedido> detallePedido; // se trabaja con List
